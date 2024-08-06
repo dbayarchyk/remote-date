@@ -1,4 +1,7 @@
 const { RemoteDate } = require("./remote-date");
+const {
+  estimateRemoteDateEpochWithAccountedNetworkDelay,
+} = require("./estimate-remote-date-epoch-with-accounted-network-delay");
 
 /**
  * @typedef {{
@@ -71,18 +74,14 @@ class RemoteDateSynchronizer {
     });
     const syncEndMonotonicTimeInMs = performance.now();
 
-    const fullSyncDuration = Math.round(
-      syncEndMonotonicTimeInMs - syncStartMonotonicTimeInMs
-    );
-    const serverProcessingDuration = Math.round(
-      serverEndProcessingMonotonicTimeInMs -
-        serverStartProcessingMonotonicTimeInMs
-    );
-
-    const roundTripNetworkDelay = fullSyncDuration - serverProcessingDuration;
-
     const estimatedRemoteDateWhenSyncEnded =
-      Number(remoteDate) + roundTripNetworkDelay / 2;
+      estimateRemoteDateEpochWithAccountedNetworkDelay({
+        receivedRemoteDate: remoteDate,
+        syncStartMonotonicTimeInMs,
+        serverStartProcessingMonotonicTimeInMs,
+        serverEndProcessingMonotonicTimeInMs,
+        syncEndMonotonicTimeInMs,
+      });
 
     RemoteDate.init({
       remoteDate: new Date(estimatedRemoteDateWhenSyncEnded),
