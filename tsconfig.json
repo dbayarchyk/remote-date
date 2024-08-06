@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+		"target": "es2015",
+		"lib": ["es2015"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "declaration": true,
+    "noImplicitOverride": true,
+    "noEmit": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
