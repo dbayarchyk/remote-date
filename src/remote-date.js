@@ -11,7 +11,7 @@ export class RemoteDate {
 
   /**
    * @typedef {{
-   * remoteDate: Date,
+   * remoteDate: Date | number,
    * referencingMonotonicTime?: number,
    * }} RemoteDateOptions
    *
@@ -28,7 +28,7 @@ export class RemoteDate {
 
   /**
    * @typedef {{
-   * remoteDate: Date,
+   * remoteDate: Date | number,
    * referencingMonotonicTime?: number,
    * }} InitOptions
    *
