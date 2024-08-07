@@ -5,7 +5,7 @@ const {
 
 /**
  * @typedef {{
- *  signal: AbortController['signal'];
+ * signal: AbortController['signal'];
  * }} FetchRemoteOptions
  *
  * @typedef {{
@@ -83,7 +83,7 @@ class RemoteDateSynchronizer {
         syncEndMonotonicTimeInMs,
       });
 
-    RemoteDate.init({
+    RemoteDate.setRemoteTime({
       remoteDate: new Date(estimatedRemoteDateWhenSyncEnded),
       referencingMonotonicTime: syncEndMonotonicTimeInMs,
     });

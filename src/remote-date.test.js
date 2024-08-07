@@ -5,9 +5,9 @@ describe("RemoteDate", () => {
     RemoteDate.destroy();
   });
 
-  describe("init", () => {
+  describe("setSystemTime", () => {
     it("should initialize the RemoteDate value to be able to use RemoteDate.now() later", () => {
-      RemoteDate.init({ remoteDate: new Date("2024-08-05T00:00Z") });
+      RemoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
 
       expect(RemoteDate.now()).toEqual(expect.any(Number));
     });
@@ -17,7 +17,7 @@ describe("RemoteDate", () => {
     describe("given not initialized", () => {
       it("should throw the error when called before initializing", () => {
         expect(() => RemoteDate.now()).toThrow(
-          new Error("RemoteDate is not synced yet.")
+          new Error("RemoteDate is not set yet.")
         );
       });
     });
@@ -26,7 +26,7 @@ describe("RemoteDate", () => {
       it("should return the correct epoch milliseconds equal to the estimated current remote date", () => {
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
 
-        RemoteDate.init({ remoteDate: new Date("2024-08-05T00:00Z") });
+        RemoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
 
         let remoteNow = RemoteDate.now();
         expect(remoteNow).toEqual(1722816000000);
@@ -49,7 +49,7 @@ describe("RemoteDate", () => {
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
         jest.advanceTimersByTime(10_000);
 
-        RemoteDate.init({
+        RemoteDate.setRemoteTime({
           remoteDate: new Date("2024-08-05T00:00Z"),
           referencingMonotonicTime: performance.now(),
         });
@@ -73,13 +73,13 @@ describe("RemoteDate", () => {
 
   describe("destroy", () => {
     it("should require RemoteDate.init after calling destroy", () => {
-      RemoteDate.init({ remoteDate: new Date("2024-08-05T00:00Z") });
+      RemoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
       expect(RemoteDate.now()).toEqual(expect.any(Number));
 
       RemoteDate.destroy();
 
       expect(() => RemoteDate.now()).toThrow(
-        new Error("RemoteDate is not synced yet.")
+        new Error("RemoteDate is not set yet.")
       );
     });
   });

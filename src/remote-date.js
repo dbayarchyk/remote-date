@@ -17,7 +17,7 @@ class RemoteDate {
    *
    * @param {InitOptions} options
    */
-  static init({ remoteDate, referencingMonotonicTime }) {
+  static setRemoteTime({ remoteDate, referencingMonotonicTime }) {
     this.#referencingEpoch = Number(remoteDate);
     this.#referencingMonotonicTime =
       referencingMonotonicTime ?? performance.now();
@@ -36,7 +36,7 @@ class RemoteDate {
       !this.#referencingEpoch ||
       typeof this.#referencingMonotonicTime !== "number"
     ) {
-      throw new Error(`${RemoteDate.name} is not synced yet.`);
+      throw new Error(`${RemoteDate.name} is not set yet.`);
     }
 
     return (
