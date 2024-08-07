@@ -19,14 +19,32 @@ export class RemoteDateSynchronizer {
   /**
    * @type {FetchRemote | null}
    */
-  static #fetchRemote = null;
+  #fetchRemote = null;
 
   /**
    * @type {AbortController | null}
    */
-  static #fetchRemoteAbortController = null;
+  #fetchRemoteAbortController = null;
 
-  static destroy() {
+  /**
+   * @type {RemoteDate}
+   */
+  #remoteDate;
+
+  /**
+   * @typedef {{
+   * fetchRemote: FetchRemote,
+   * remoteDate: RemoteDate,
+   * }} InitFromRemoteOptions
+   *
+   * @param {InitFromRemoteOptions} options
+   */
+  constructor({ fetchRemote, remoteDate }) {
+    this.#fetchRemote = fetchRemote;
+    this.#remoteDate = remoteDate;
+  }
+
+  destroy() {
     this.#fetchRemote = null;
     if (this.#fetchRemoteAbortController) {
       this.#fetchRemoteAbortController.abort();
@@ -35,22 +53,9 @@ export class RemoteDateSynchronizer {
   }
 
   /**
-   * @typedef {{
-   * fetchRemote: FetchRemote
-   * }} InitFromRemoteOptions
-   *
-   * @param {InitFromRemoteOptions} options
    * @returns {Promise<void>}
    */
-  static async initRemoteDateFromRemote({ fetchRemote }) {
-    this.#fetchRemote = fetchRemote;
-    await this.#syncWithRemote();
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  static async #syncWithRemote() {
+  async syncWithRemote() {
     if (!this.#fetchRemote) {
       throw new Error(
         `${RemoteDate.name} is not initialized yet with the fetchRemote function.`
@@ -81,7 +86,7 @@ export class RemoteDateSynchronizer {
         syncEndMonotonicTimeInMs,
       });
 
-    RemoteDate.setRemoteTime({
+    this.#remoteDate.setRemoteTime({
       remoteDate: new Date(estimatedRemoteDateWhenSyncEnded),
       referencingMonotonicTime: syncEndMonotonicTimeInMs,
     });

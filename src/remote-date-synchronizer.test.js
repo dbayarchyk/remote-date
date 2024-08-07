@@ -2,18 +2,15 @@ import { RemoteDate } from "./remote-date";
 import { RemoteDateSynchronizer } from "./remote-date-synchronizer";
 
 describe("RemoteDateSynchronizer", () => {
-  afterEach(() => {
-    RemoteDate.destroy();
-    RemoteDateSynchronizer.destroy();
-  });
-
-  describe("initFromRemote", () => {
+  describe("syncWithRemote", () => {
     describe("given the remote date fetching resolves", () => {
       it("should correctly estimate the current remote date taking network delay into account", async () => {
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
         jest.advanceTimersByTime(10_000);
 
-        await RemoteDateSynchronizer.initRemoteDateFromRemote({
+        const remoteDate = new RemoteDate();
+        const remoteDateSynchronizer = new RemoteDateSynchronizer({
+          remoteDate: remoteDate,
           fetchRemote: () => {
             // Advancing monotonic timer simulating a full sync delay of 3 seconds
             // including 2 seconds of server processing time and 1 second of network round trip delay.
@@ -27,7 +24,9 @@ describe("RemoteDateSynchronizer", () => {
           },
         });
 
-        let remoteNow = RemoteDate.now();
+        await remoteDateSynchronizer.syncWithRemote();
+
+        let remoteNow = remoteDate.now();
         expect(remoteNow).toEqual(1722816000500);
         // Assuming the network latency is symmetrical.
         expect(new Date(remoteNow)).toEqual(
@@ -35,14 +34,14 @@ describe("RemoteDateSynchronizer", () => {
         );
 
         jest.advanceTimersByTime(1_000);
-        remoteNow = RemoteDate.now();
+        remoteNow = remoteDate.now();
         expect(remoteNow).toEqual(1722816001500);
         expect(new Date(remoteNow)).toEqual(
           new Date("2024-08-05T00:00:01.500Z")
         );
 
         jest.advanceTimersByTime(1_000);
-        remoteNow = RemoteDate.now();
+        remoteNow = remoteDate.now();
         expect(remoteNow).toEqual(1722816002500);
         expect(new Date(remoteNow)).toEqual(
           new Date("2024-08-05T00:00:02.500Z")
@@ -52,12 +51,14 @@ describe("RemoteDateSynchronizer", () => {
 
     describe("given the remote date fetching rejects", () => {
       it("should rethrow the error", async () => {
-        await expect(
-          RemoteDateSynchronizer.initRemoteDateFromRemote({
-            fetchRemote: () =>
-              Promise.reject(new Error("Something went wrong")),
-          })
-        ).rejects.toThrow("Something went wrong");
+        const remoteDateSynchronizer = new RemoteDateSynchronizer({
+          remoteDate: new RemoteDate(),
+          fetchRemote: () => Promise.reject(new Error("Something went wrong")),
+        });
+
+        await expect(remoteDateSynchronizer.syncWithRemote()).rejects.toThrow(
+          "Something went wrong"
+        );
       });
     });
   });
@@ -66,7 +67,9 @@ describe("RemoteDateSynchronizer", () => {
     it("should abort the abort controller signal", () => {
       jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
       const emulatedServerPingListener = jest.fn();
-      RemoteDateSynchronizer.initRemoteDateFromRemote({
+
+      const remoteDateSynchronizer = new RemoteDateSynchronizer({
+        remoteDate: new RemoteDate(),
         fetchRemote: ({ signal }) =>
           new Promise((resolve) => {
             signal.throwIfAborted();
@@ -84,7 +87,9 @@ describe("RemoteDateSynchronizer", () => {
           }),
       });
 
-      RemoteDateSynchronizer.destroy();
+      remoteDateSynchronizer.syncWithRemote();
+
+      remoteDateSynchronizer.destroy();
 
       jest.runOnlyPendingTimers();
 

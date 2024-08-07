@@ -2,12 +2,12 @@ export class RemoteDate {
   /**
    * @type {number | null}
    */
-  static #referencingEpoch = null;
+  #referencingEpoch = null;
 
   /**
    * @type {number | null}
    */
-  static #referencingMonotonicTime = null;
+  #referencingMonotonicTime = null;
 
   /**
    * @typedef {{
@@ -17,21 +17,16 @@ export class RemoteDate {
    *
    * @param {InitOptions} options
    */
-  static setRemoteTime({ remoteDate, referencingMonotonicTime }) {
+  setRemoteTime({ remoteDate, referencingMonotonicTime }) {
     this.#referencingEpoch = Number(remoteDate);
     this.#referencingMonotonicTime =
       referencingMonotonicTime ?? performance.now();
   }
 
-  static destroy() {
-    this.#referencingEpoch = null;
-    this.#referencingMonotonicTime = null;
-  }
-
   /**
    * @returns {number}
    * */
-  static now() {
+  now() {
     if (
       !this.#referencingEpoch ||
       typeof this.#referencingMonotonicTime !== "number"
