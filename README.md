@@ -35,6 +35,8 @@ remoteDate.dateNow(); // 2024-08-05T00:00:10Z
 ```
 
 ```js
+import { RemoteDate, RemoteDateSynchronizer } from 'remote-date';
+
 const remoteDate = new RemoteDate();
 const remoteDateSynchronizer = new RemoteDateSynchronizer({
   remoteDate: remoteDate,
