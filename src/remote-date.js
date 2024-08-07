@@ -13,6 +13,23 @@ export class RemoteDate {
    * @typedef {{
    * remoteDate: Date,
    * referencingMonotonicTime?: number,
+   * }} RemoteDateOptions
+   *
+   * @param {RemoteDateOptions | undefined} [options]
+   */
+  constructor(options) {
+    if (options && options.remoteDate) {
+      this.setRemoteTime({
+        remoteDate: options.remoteDate,
+        referencingMonotonicTime: options.referencingMonotonicTime,
+      });
+    }
+  }
+
+  /**
+   * @typedef {{
+   * remoteDate: Date,
+   * referencingMonotonicTime?: number,
    * }} InitOptions
    *
    * @param {InitOptions} options

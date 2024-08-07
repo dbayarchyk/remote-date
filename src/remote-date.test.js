@@ -23,10 +23,11 @@ describe("RemoteDate", () => {
 
     describe("given initialized with the default referencing monotonic time", () => {
       it("should return the correct epoch milliseconds equal to the estimated current remote date", () => {
-        const remoteDate = new RemoteDate();
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
 
-        remoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
+        const remoteDate = new RemoteDate({
+          remoteDate: new Date("2024-08-05T00:00Z"),
+        });
 
         let remoteNow = remoteDate.now();
         expect(remoteNow).toEqual(1722816000000);
@@ -46,11 +47,10 @@ describe("RemoteDate", () => {
 
     describe("given initialized with the custom referencing monotonic time", () => {
       it("should return the correct epoch milliseconds equal to the estimated current remote date", () => {
-        const remoteDate = new RemoteDate();
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
         jest.advanceTimersByTime(10_000);
 
-        remoteDate.setRemoteTime({
+        const remoteDate = new RemoteDate({
           remoteDate: new Date("2024-08-05T00:00Z"),
           referencingMonotonicTime: performance.now(),
         });
@@ -84,10 +84,11 @@ describe("RemoteDate", () => {
 
     describe("given initialized with the default referencing monotonic time", () => {
       it("should return the correct epoch milliseconds equal to the estimated current remote date", () => {
-        const remoteDate = new RemoteDate();
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
 
-        remoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
+        const remoteDate = new RemoteDate({
+          remoteDate: new Date("2024-08-05T00:00Z"),
+        });
 
         expect(remoteDate.dateNow()).toEqual(new Date("2024-08-05T00:00:00Z"));
 
@@ -101,11 +102,10 @@ describe("RemoteDate", () => {
 
     describe("given initialized with the custom referencing monotonic time", () => {
       it("should return the correct epoch milliseconds equal to the estimated current remote date", () => {
-        const remoteDate = new RemoteDate();
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
         jest.advanceTimersByTime(10_000);
 
-        remoteDate.setRemoteTime({
+        const remoteDate = new RemoteDate({
           remoteDate: new Date("2024-08-05T00:00Z"),
           referencingMonotonicTime: performance.now(),
         });
