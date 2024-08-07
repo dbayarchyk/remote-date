@@ -39,4 +39,11 @@ export class RemoteDate {
       Math.round(performance.now() - this.#referencingMonotonicTime)
     );
   }
+
+  /**
+   * @returns {Date}
+   * */
+  dateNow() {
+    return new Date(this.now());
+  }
 }
