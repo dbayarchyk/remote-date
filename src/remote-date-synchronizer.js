@@ -1,7 +1,5 @@
-const { RemoteDate } = require("./remote-date");
-const {
-  estimateRemoteDateEpochWithAccountedNetworkDelay,
-} = require("./estimate-remote-date-epoch-with-accounted-network-delay");
+import { RemoteDate } from "./remote-date";
+import { estimateRemoteDateEpochWithAccountedNetworkDelay } from "./estimate-remote-date-epoch-with-accounted-network-delay";
 
 /**
  * @typedef {{
@@ -17,7 +15,7 @@ const {
  * @typedef {(options: FetchRemoteOptions) => Promise<FetchRemoteResult>} FetchRemote
  */
 
-class RemoteDateSynchronizer {
+export class RemoteDateSynchronizer {
   /**
    * @type {FetchRemote | null}
    */
@@ -89,5 +87,3 @@ class RemoteDateSynchronizer {
     });
   }
 }
-
-module.exports.RemoteDateSynchronizer = RemoteDateSynchronizer;

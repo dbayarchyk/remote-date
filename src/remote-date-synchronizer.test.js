@@ -1,5 +1,5 @@
-const { RemoteDate } = require("./remote-date");
-const { RemoteDateSynchronizer } = require("./remote-date-synchronizer");
+import { RemoteDate } from "./remote-date";
+import { RemoteDateSynchronizer } from "./remote-date-synchronizer";
 
 describe("RemoteDateSynchronizer", () => {
   afterEach(() => {

@@ -1,4 +1,4 @@
-const { RemoteDate } = require("./remote-date");
+import { RemoteDate } from "./remote-date";
 
 describe("RemoteDate", () => {
   afterEach(() => {

@@ -10,7 +10,7 @@
  * @param {EstimateCurrentRemoteDateOptions} options
  * @returns {number}
  * */
-function estimateRemoteDateEpochWithAccountedNetworkDelay({
+export function estimateRemoteDateEpochWithAccountedNetworkDelay({
   receivedRemoteDate,
   syncStartMonotonicTimeInMs,
   serverStartProcessingMonotonicTimeInMs,
@@ -29,6 +29,3 @@ function estimateRemoteDateEpochWithAccountedNetworkDelay({
 
   return Number(receivedRemoteDate) + roundTripNetworkDelay / 2;
 }
-
-module.exports.estimateRemoteDateEpochWithAccountedNetworkDelay =
-  estimateRemoteDateEpochWithAccountedNetworkDelay;

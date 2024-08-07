@@ -1,4 +1,4 @@
-class RemoteDate {
+export class RemoteDate {
   /**
    * @type {number | null}
    */
@@ -45,5 +45,3 @@ class RemoteDate {
     );
   }
 }
-
-module.exports.RemoteDate = RemoteDate;
