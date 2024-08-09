@@ -1,6 +1,6 @@
 {
   "name": "remote-date",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "files": [
     "src",
@@ -15,11 +15,15 @@
     "lint": "prettier --check \"src/**/*.js\"",
     "type-check": "tsc",
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "changeset:add": "changeset add",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish"
   },
   "author": "Dzmitry Bayarchyk",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "eslint": "^8.35.0",
