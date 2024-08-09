@@ -16,6 +16,10 @@ To install `remote-date`, use npm:
 npm install remote-date
 ```
 
+## Documentation
+
+You can view the documentation [https://dbayarchyk.github.io/remote-date](https://dbayarchyk.github.io/remote-date/).
+
 ## Example
 
 ```js
