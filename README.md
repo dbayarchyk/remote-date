@@ -23,7 +23,7 @@ You can view the documentation [https://dbayarchyk.github.io/remote-date](https:
 ## Example
 
 ```js
-import { RemoteDate } from 'remote-date';
+import { RemoteDate } from "remote-date";
 
 const remoteDate = new RemoteDate({
   remoteDate: new Date("2024-08-05T00:00Z"),
@@ -39,20 +39,24 @@ remoteDate.dateNow(); // 2024-08-05T00:00:10Z
 ```
 
 ```js
-import { RemoteDate, RemoteDateSynchronizer } from 'remote-date';
+import { RemoteDate, RemoteDateSynchronizer } from "remote-date";
 
 const remoteDate = new RemoteDate();
 const remoteDateSynchronizer = new RemoteDateSynchronizer({
   remoteDate: remoteDate,
   fetchRemote: async ({ signal }) => {
-    const response = await fetch('https://api.example.com/remote-date', { signal });
+    const response = await fetch("https://api.example.com/remote-date", {
+      signal,
+    });
     const data = await response.json();
 
     return {
       remoteDate: new Date(data.remoteDate),
-      serverStartProcessingMonotonicTimeInMs: data.serverStartProcessingMonotonicTimeInMs,
-      serverEndProcessingMonotonicTimeInMs: data.serverEndProcessingMonotonicTimeInMs,
-    }
+      serverStartProcessingMonotonicTimeInMs:
+        data.serverStartProcessingMonotonicTimeInMs,
+      serverEndProcessingMonotonicTimeInMs:
+        data.serverEndProcessingMonotonicTimeInMs,
+    };
   },
 });
 
@@ -74,4 +78,5 @@ remoteDate.dateNow(); // 2024-08-05T00:00:10Z
 - [Distributed Systems 3.2: Clock synchronisation](https://youtu.be/mAyW-4LeXZo?feature=shared)
 
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
