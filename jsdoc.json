@@ -1,0 +1,12 @@
+{
+  "source": {
+    "include": ["src/remote-date.js", "src/remote-date-synchronizer.js"]
+  },
+  "opts": {
+    "readme": "README.md",
+    "template": "templates/default",
+    "encoding": "utf8",
+    "destination": "./docs",
+    "recurse": true
+  }
+}

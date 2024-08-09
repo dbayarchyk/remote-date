@@ -1,11 +1,10 @@
 /**
- * @typedef {{
- * syncStartMonotonicTimeInMs: number,
- * receivedRemoteDate: Date,
- * serverStartProcessingMonotonicTimeInMs: number,
- * serverEndProcessingMonotonicTimeInMs: number,
- * syncEndMonotonicTimeInMs: number,
- * }} EstimateCurrentRemoteDateOptions
+ * @typedef {Object} EstimateCurrentRemoteDateOptions
+ * @property {number} syncStartMonotonicTimeInMs
+ * @property {Date} receivedRemoteDate
+ * @property {number} serverStartProcessingMonotonicTimeInMs
+ * @property {number} serverEndProcessingMonotonicTimeInMs
+ * @property {number} syncEndMonotonicTimeInMs
  *
  * @param {EstimateCurrentRemoteDateOptions} options
  * @returns {number}
