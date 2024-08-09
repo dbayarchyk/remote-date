@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  Tests:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        include:
+          - node-version: 18
+            os: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm install --frozen-lockfile
+      - run: npm test
+        env:
+          CI: true
+
+  Lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - name: install
+        run: npm install --frozen-lockfile
+      - name: type check
+        run: npm type-check
+      - name: lint
+        if: (${{ success() }} || ${{ failure() }}) # ensures this step runs even if previous steps fail (avoids multiple runs uncovering different issues at different steps)
+        run: npm lint
