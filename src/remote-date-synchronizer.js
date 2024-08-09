@@ -1,5 +1,5 @@
-import { RemoteDate } from "./remote-date";
-import { estimateRemoteDateEpochWithAccountedNetworkDelay } from "./estimate-remote-date-epoch-with-accounted-network-delay";
+import { RemoteDate } from "./remote-date.js";
+import { estimateRemoteDateEpochWithAccountedNetworkDelay } from "./estimate-remote-date-epoch-with-accounted-network-delay.js";
 
 /**
  * @typedef {Object} FetchRemoteOptions

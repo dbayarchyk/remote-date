@@ -1,2 +1,2 @@
-export { RemoteDate } from "./remote-date";
-export { RemoteDateSynchronizer } from "./remote-date-synchronizer";
+export { RemoteDate } from "./remote-date.js";
+export { RemoteDateSynchronizer } from "./remote-date-synchronizer.js";

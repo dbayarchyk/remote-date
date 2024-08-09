@@ -1,5 +1,5 @@
-import { RemoteDate } from "./remote-date";
-import { RemoteDateSynchronizer } from "./remote-date-synchronizer";
+import { RemoteDate } from "./remote-date.js";
+import { RemoteDateSynchronizer } from "./remote-date-synchronizer.js";
 
 describe("RemoteDateSynchronizer", () => {
   describe("syncWithRemote", () => {

@@ -1,4 +1,4 @@
-import { RemoteDate } from "./remote-date";
+import { RemoteDate } from "./remote-date.js";
 
 describe("RemoteDate", () => {
   describe("setSystemTime", () => {
