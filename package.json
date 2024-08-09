@@ -11,9 +11,8 @@
   "module": "src/index.js",
   "main": "src/index.js",
   "scripts": {
-    "format": "prettier --write \"src/**/*.(js|ts)\"",
-    "lint": "eslint src --ext .js,.ts",
-    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "format": "prettier --check --write \"src/**/*.js\"",
+    "lint": "prettier --check \"src/**/*.js\"",
     "type-check": "tsc",
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest",
     "docs": "jsdoc -c jsdoc.json"
