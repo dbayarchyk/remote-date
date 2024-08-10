@@ -21,6 +21,14 @@
     "changeset:publish": "changeset publish"
   },
   "author": "Dzmitry Bayarchyk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbayarchyk/remote-date.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dbayarchyk/remote-date/issues"
+  },
+  "homepage": "https://dbayarchyk.github.io/remote-date",
   "license": "MIT",
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
