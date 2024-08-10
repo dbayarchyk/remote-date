@@ -1,7 +1,7 @@
 /**
  * @typedef {Object} EstimateCurrentRemoteDateOptions
  * @property {number} syncStartMonotonicTimeInMs
- * @property {Date} receivedRemoteDate
+ * @property {Date | number} receivedRemoteDate
  * @property {number} serverStartProcessingMonotonicTimeInMs
  * @property {number} serverEndProcessingMonotonicTimeInMs
  * @property {number} syncEndMonotonicTimeInMs

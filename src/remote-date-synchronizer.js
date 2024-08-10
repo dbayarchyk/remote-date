@@ -84,7 +84,7 @@ export class RemoteDateSynchronizer {
       });
 
     this.#remoteDate.setRemoteTime({
-      remoteDate: new Date(estimatedRemoteDateWhenSyncEnded),
+      referencingDate: new Date(estimatedRemoteDateWhenSyncEnded),
       referencingMonotonicTime: syncEndMonotonicTimeInMs,
     });
   }

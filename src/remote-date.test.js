@@ -5,7 +5,9 @@ describe("RemoteDate", () => {
     it("should initialize the RemoteDate value to be able to use RemoteDate.now() later", () => {
       const remoteDate = new RemoteDate();
 
-      remoteDate.setRemoteTime({ remoteDate: new Date("2024-08-05T00:00Z") });
+      remoteDate.setRemoteTime({
+        referencingDate: new Date("2024-08-05T00:00Z"),
+      });
 
       expect(remoteDate.now()).toEqual(expect.any(Number));
     });
@@ -26,7 +28,7 @@ describe("RemoteDate", () => {
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
 
         const remoteDate = new RemoteDate({
-          remoteDate: new Date("2024-08-05T00:00Z"),
+          referencingDate: new Date("2024-08-05T00:00Z"),
         });
 
         let remoteNow = remoteDate.now();
@@ -51,7 +53,7 @@ describe("RemoteDate", () => {
         jest.advanceTimersByTime(10_000);
 
         const remoteDate = new RemoteDate({
-          remoteDate: new Date("2024-08-05T00:00Z"),
+          referencingDate: new Date("2024-08-05T00:00Z"),
           referencingMonotonicTime: performance.now(),
         });
 
@@ -87,7 +89,7 @@ describe("RemoteDate", () => {
         jest.useFakeTimers().setSystemTime(new Date("2024-08-05T18:00Z"));
 
         const remoteDate = new RemoteDate({
-          remoteDate: new Date("2024-08-05T00:00Z"),
+          referencingDate: new Date("2024-08-05T00:00Z"),
         });
 
         expect(remoteDate.dateNow()).toEqual(new Date("2024-08-05T00:00:00Z"));
@@ -106,7 +108,7 @@ describe("RemoteDate", () => {
         jest.advanceTimersByTime(10_000);
 
         const remoteDate = new RemoteDate({
-          remoteDate: new Date("2024-08-05T00:00Z"),
+          referencingDate: new Date("2024-08-05T00:00Z"),
           referencingMonotonicTime: performance.now(),
         });
 

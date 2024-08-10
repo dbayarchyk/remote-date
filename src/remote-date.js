@@ -12,7 +12,7 @@ export class RemoteDate {
 
   /**
    * @typedef {Object} RemoteDateOptions
-   * @property {Date | number} remoteDate
+   * @property {Date | number} referencingDate
    * @property {number} [referencingMonotonicTime]
    * */
 
@@ -22,9 +22,9 @@ export class RemoteDate {
    * @param {RemoteDateOptions | undefined} [options]
    * */
   constructor(options) {
-    if (options && options.remoteDate) {
+    if (options && options.referencingDate) {
       this.setRemoteTime({
-        remoteDate: options.remoteDate,
+        referencingDate: options.referencingDate,
         referencingMonotonicTime: options.referencingMonotonicTime,
       });
     }
@@ -32,7 +32,7 @@ export class RemoteDate {
 
   /**
    * @typedef {Object} SetRemoteTimeOptions
-   * @property {Date | number} remoteDate
+   * @property {Date | number} referencingDate
    * @property {number} [referencingMonotonicTime] - A result of the monotonic clock performance.now() when the removeDate was initialized.
    */
 
@@ -42,8 +42,8 @@ export class RemoteDate {
    * @param {SetRemoteTimeOptions} options
    * @returns {void}
    * */
-  setRemoteTime({ remoteDate, referencingMonotonicTime }) {
-    this.#referencingEpoch = Number(remoteDate);
+  setRemoteTime({ referencingDate, referencingMonotonicTime }) {
+    this.#referencingEpoch = Number(referencingDate);
     this.#referencingMonotonicTime =
       referencingMonotonicTime ?? performance.now();
   }
