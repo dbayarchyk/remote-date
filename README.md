@@ -18,7 +18,9 @@ npm install remote-date
 
 ## Documentation
 
-You can view the documentation [https://dbayarchyk.github.io/remote-date](https://dbayarchyk.github.io/remote-date/).
+You can view the documentation here:
+
+[https://dbayarchyk.github.io/remote-date](https://dbayarchyk.github.io/remote-date/).
 
 ## Example
 

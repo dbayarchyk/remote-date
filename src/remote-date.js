@@ -13,7 +13,7 @@ export class RemoteDate {
   /**
    * @typedef {Object} RemoteDateOptions
    * @property {Date | number} referencingDate
-   * @property {number} [referencingMonotonicTime]
+   * @property {number} [referencingMonotonicTime] A result of the monotonic clock performance.now() when the referencingDate was initialized.
    * */
 
   /**
@@ -33,7 +33,7 @@ export class RemoteDate {
   /**
    * @typedef {Object} SetRemoteTimeOptions
    * @property {Date | number} referencingDate
-   * @property {number} [referencingMonotonicTime] - A result of the monotonic clock performance.now() when the removeDate was initialized.
+   * @property {number} [referencingMonotonicTime] A result of the monotonic clock performance.now() when the referencingDate was initialized.
    */
 
   /**
@@ -69,7 +69,7 @@ export class RemoteDate {
   }
 
   /**
-   * Returns the newly-created Date object represents the current date and time as of the time of instantiation.
+   * Returns the newly-created Date object which represents the current date and time as of the time of instantiation.
    * The returned date's timestamp is the same as the number returned by remoteDate.now().
    *
    * The Remote instance needs to be initialized once first via a constructor or remoteDate.setRemoteTime() before being able to use remoteDate.dateNow().
