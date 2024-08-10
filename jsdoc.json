@@ -4,9 +4,42 @@
   },
   "opts": {
     "readme": "README.md",
-    "template": "templates/default",
+    "template": "node_modules/clean-jsdoc-theme",
     "encoding": "utf8",
     "destination": "./docs",
-    "recurse": true
+    "recurse": true,
+    "theme_opts": {
+      "homepageTitle": "Remote Date",
+      "menu": [
+        {
+          "title": "Home",
+          "link": "./"
+        },
+        {
+          "title": "Github",
+          "link": "https://github.com/dbayarchyk/remote-date",
+          "target": "_blank"
+        },
+        {
+          "title": "npm",
+          "link": "https://www.npmjs.com/package/remote-date",
+          "target": "_blank"
+        }
+      ],
+      "meta": [
+        {
+          "name": "author",
+          "content": "Dzmitry Bayarchyk"
+        },
+        {
+          "name": "description",
+          "content": "A JavaScript library for synchronizing local time with a remote server."
+        }
+      ]
+    }
+  },
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
   }
 }
